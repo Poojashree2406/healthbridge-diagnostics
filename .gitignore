@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# Environment files
+.env
+.env.local
+.env.production.local
+**/.env
+**/.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Vite cache
+**/.vite/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# MongoDB memory server binary cache
+.cache/
+**/mongodb-binaries/

@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: healthbridge-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: healthbridge
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - healthbridge-net
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    container_name: healthbridge-backend
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGODB_URI: mongodb://mongodb:27017/healthbridge
+      JWT_SECRET: healthbridge_super_secret_jwt_key_2026_production_grade
+      JWT_REFRESH_SECRET: healthbridge_super_secret_refresh_jwt_key_2026
+      CLIENT_URL: http://localhost:5173
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+    networks:
+      - healthbridge-net
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    container_name: healthbridge-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - healthbridge-net
+
+volumes:
+  mongo_data:
+
+networks:
+  healthbridge-net:
+    driver: bridge

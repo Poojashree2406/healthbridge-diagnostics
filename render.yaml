@@ -1,0 +1,22 @@
+# ── Render Web Service config ─────────────────────────────────────────────────
+services:
+  - type: web
+    name: healthbridge-api
+    runtime: node
+    region: singapore        # closest to India
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: node dist/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        generateValue: true   # Render auto-generates a secure secret
+      - key: MONGODB_URI
+        sync: false           # You will paste your Atlas URI here in Render dashboard
+      - key: CLIENT_URL
+        sync: false           # Your Vercel URL e.g. https://healthbridge.vercel.app
