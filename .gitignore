@@ -2,6 +2,10 @@
 node_modules/
 **/node_modules/
 
+# Local MongoDB persistent data (from npm run db)
+.mongodb-data/
+.mongodb-uri
+
 # Build outputs
 dist/
 **/dist/

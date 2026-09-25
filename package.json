@@ -2,16 +2,13 @@
   "name": "healthbridge-diagnostics",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "shared",
-    "server",
-    "client"
-  ],
+  "workspaces": ["shared", "server", "client"],
   "scripts": {
     "build:shared": "npm run build --prefix shared",
     "build:server": "npm run build --prefix server",
     "build:client": "npm run build --prefix client",
     "build": "npm run build:shared && npm run build:server && npm run build:client",
+    "db": "npm run db --prefix server",
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
     "seed": "npm run seed --prefix server",
